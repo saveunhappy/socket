@@ -22,6 +22,7 @@ public class Client {
                 String input = consoleReader.readLine();
                 //发送给服务器
                 writer.write(input + "\r\n");
+                /*刷一下马桶*/
                 writer.flush();
                 //读取服务器返回的消息
                 String msg = reader.readLine();
