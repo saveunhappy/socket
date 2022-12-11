@@ -56,8 +56,17 @@ public class ChatClient {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-            // 处理用户的输入
+            // 处理用户的输入,这个里面就是个死循环，一直等着输入的，不会说你说一句话就创建一个线程
+            //而是你第一次进来就去创建那一个线程，在那一个线程中一直等着你输入，如果你输入了quit退出
+            //那么才会退出这个线程，在UserInputHandler中的run方法中去看那个方法把
+            /*
+            *  if(chatClient.readyToQuit(input)){
+                    break;
+               }
+            * */
+
             new Thread(new UserInputHandler(this)).start();
+            //退出了，然后来到下面
             //读取服务器转发的消息
             String msg = null;
             while ((msg = receive()) != null) {
