@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
 public class ChatServer {
@@ -16,10 +17,10 @@ public class ChatServer {
 
     private ServerSocketChannel server;
     private Selector selector;
-    private ByteBuffer rBuffer = ByteBuffer.allocate(BUFFER);
-    private ByteBuffer wBuffer = ByteBuffer.allocate(BUFFER);
-    private Charset charset = Charset.forName("UTF-8");
-    private int port;
+    private final ByteBuffer rBuffer = ByteBuffer.allocate(BUFFER);
+    private final ByteBuffer wBuffer = ByteBuffer.allocate(BUFFER);
+    private final Charset charset = StandardCharsets.UTF_8;
+    private final int port;
 
     public ChatServer() {
         this(DEFAULT_PORT);
@@ -34,7 +35,6 @@ public class ChatServer {
             server = ServerSocketChannel.open();
             server.configureBlocking(false);
             server.socket().bind(new InetSocketAddress(port));
-
             selector = Selector.open();
             server.register(selector, SelectionKey.OP_ACCEPT);
             System.out.println("启动服务器， 监听端口：" + port + "...");
