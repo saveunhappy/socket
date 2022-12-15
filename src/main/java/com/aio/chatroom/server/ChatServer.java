@@ -181,7 +181,8 @@ public class ChatServer {
             if(!clientChannel.equals(handler.clientChannel)){
                 try {
                     ByteBuffer buffer = charset.encode(getClientName(handler.clientChannel) + ":" + fwdMsg);
-                    handler.clientChannel.write(buffer, null, handler);
+//                    handler.clientChannel.write(buffer, null, handler);
+                    handler.clientChannel.write(buffer);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

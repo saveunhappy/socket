@@ -45,7 +45,7 @@ public class ChatClient {
         }
     }
 
-    private void start() {
+    void start() {
         try {
             // 创建channel
             clientChannel = AsynchronousSocketChannel.open();
