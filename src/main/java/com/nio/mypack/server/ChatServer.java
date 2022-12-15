@@ -108,7 +108,9 @@ public class ChatServer {
     }
 
     private String receive(SocketChannel client) throws IOException {
+        //缓冲区清空
         rBuffer.clear();
+        /*read其实是write，，记得看buffer的put，然后看client.write()就明白，read确实是进行写操作*/
         while(client.read(rBuffer) > 0);
         rBuffer.flip();
         return String.valueOf(charset.decode(rBuffer));

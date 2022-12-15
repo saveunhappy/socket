@@ -47,7 +47,7 @@ public class ChatClient {
         }
     }
 
-    private void start() {
+    void start() {
         try {
             client = SocketChannel.open();
             client.configureBlocking(false);
@@ -104,9 +104,12 @@ public class ChatClient {
         }
 
         wBuffer.clear();
+        /*注意这个put，这个是buffer的put*/
         wBuffer.put(charset.encode(msg));
         wBuffer.flip();
+
         while (wBuffer.hasRemaining()) {
+            /*然后这里的write其实是读取，是从buffer中读取的*/
             client.write(wBuffer);
         }
 
